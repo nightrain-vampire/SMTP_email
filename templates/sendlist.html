@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}已发送{% endblock %}
+
+{% block page_content %}
+    <div class="col content">
+        <h3>发送列表</h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>发件人地址</th>
+                    <th>收件人地址</th>
+                    <th>邮件主题</th>
+                    <th>邮件正文</th>
+                    <th>附件</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for id in data_dict %}
+                    <tr>
+                        <th>{{ id['fromAddress'] }}</th>
+                        <th>{{ id['toAddress'] }}</th>
+                        <th>{{ id['subject'] }}</th>
+                        <th>{{ id['content'] }}</th>
+                        <th>{{ id['files'] }}</th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block page_content %}
+    <div class="col content">
+        <h1>SMTP CODE</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>应答码</th>
+                    <th>说明</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>211</td>
+                    <td>系统状态或系统帮助响应</td>
+                </tr>
+                <tr>
+                    <td>214</td>
+                    <td>帮助信息</td>
+                </tr>
+                <tr>
+                    <td>220</td>
+                    <td>＜domain＞服务就绪</td>
+                </tr>
+                <tr>
+                    <td>221</td>
+                    <td>＜domain＞服务关闭</td>
+                </tr>
+                <tr>
+                    <td>250</td>
+                    <td>要求的邮件操作完成</td>
+                </tr>
+                <tr>
+                    <td>251</td>
+                    <td>用户非本地，将转发向＜forward-path＞</td>
+                </tr>
+                <tr>
+                    <td>354</td>
+                    <td>开始邮件输入，以"."结束</td>
+                </tr>
+                <tr>
+                    <td>421</td>
+                    <td>＜domain＞服务未就绪，关闭传输信道</td>
+                </tr>
+                <tr>
+                    <td>450</td>
+                    <td>要求的邮件操作未完成，邮箱不可用</td>
+                </tr>
+                <tr>
+                    <td>451</td>
+                    <td>放弃要求的操作；处理过程中出错</td>
+                </tr>
+                <tr>
+                    <td>452</td>
+                    <td>系统存储不足，要求的操作未执行</td>
+                </tr>
+                <tr>
+                    <td>452</td>
+                    <td>系统存储不足，要求的操作未执行</td>
+                </tr>
+                <tr>
+                    <td>454</td>
+                    <td>临时认证失败,可能账号被临时冻结</td>
+                </tr>
+                <tr>
+                    <td>501</td>
+                    <td>参数格式错误</td>
+                </tr>
+                <tr>
+                    <td>502</td>
+                    <td>命令不可实现</td>
+                </tr>
+                <tr>
+                    <td>503</td>
+                    <td>错误的命令序列，接收邮箱格式错误</td>
+                </tr>
+                <tr>
+                    <td>504</td>
+                    <td>命令参数不可实现</td>
+                </tr>
+                <tr>
+                    <td>550</td>
+                    <td>要求的邮件操作未完成，邮箱不可用</td>
+                </tr>
+                <tr>
+                    <td>551</td>
+                    <td>用户非本地，请尝试＜forward-path＞</td>
+                </tr>
+                <tr>
+                    <td>552</td>
+                    <td>过量的存储分配，要求的操作未执行</td>
+                </tr>
+                <tr>
+                    <td>553</td>
+                    <td>邮箱名不可用，要求的操作未执行</td>
+                </tr>
+                <tr>
+                    <td>554</td>
+                    <td>操作失败</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

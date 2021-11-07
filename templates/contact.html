@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}通讯录{% endblock %}
+
+{% block page_content %}
+    <div class="col content">
+        <h2>通讯列表</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>昵称</th>
+                    <th>邮箱地址</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data_dict %}
+                    <tr>
+                        <th>{{ data_dict.index(item) }}</th>
+                        <th>{{ item['name'] }}</th>
+                        <th>{{ item['address'] }}</th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <h3 style="margin-left: 240px">编辑区</h3>
+        <form method="POST" action="/edit_contact">
+            <div class="form-group">
+                <label for="id" style="margin-left: 240px">目标行号(对add操作无用)</label>
+                <input type="text" class="form-control" name="id" id="id" style="margin-left: 240px; width: 350px">
+            </div>
+            <div class="form-group">
+                <label for="name" style="margin-left: 240px">联系人名称</label>
+                <input type="text" class="form-control" name="name" id="name" style="margin-left: 240px; width: 350px">
+            </div>
+            <div class="form-group">
+                <label for="address" style="margin-left: 240px">邮箱地址</label>
+                <input type="text" class="form-control" name="address" id="address" style="margin-left: 240px; width: 350px">
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-default" style="margin-left: 240px; background-color: lightseagreen" name="Submit" value="add">添加联系人</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-default" style="margin-left: 240px; background-color: ghostwhite" name="Submit" value="delete">删除联系人</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-default" style="margin-left: 240px; background-color: lightgoldenrodyellow" name="Submit" value="edit">编辑联系人</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
