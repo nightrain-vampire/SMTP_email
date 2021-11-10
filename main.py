@@ -144,6 +144,7 @@ def sendEmail():
                 print('235 reply not received from server.')
 
             for ta in toAddress:
+                email_class = ta.split("@")[1]
                 # TCP连接建立好了之后，通过用户验证就可以开始发送邮件。邮件的传送从MAIL命令开始，MAIL命令后面附上发件人的地址。
                 # 发送MAIL FROM命令，并包括发件人邮箱地址
                 clientSocket.sendall(('MAIL FROM: <' + fromAddress + '>\r\n').encode())
@@ -178,6 +179,9 @@ def sendEmail():
                 clientSocket.sendall(message.encode())
                 message = 'Content-Type: ' + "multipart/mixed; " + "boundary=" + msgBoundary + '\r\n'
                 clientSocket.sendall(message.encode())
+                if email_class != "qq.com":
+                    message = "Content-Transfer-Encoding:8bit\r\n\r\n"
+                    clientSocket.sendall(message.encode())
 
                 # 正文开始
                 message = contentBoundary + '\r\n' + 'Content-Type: text/plain' + '\r\n\r\n'
@@ -191,23 +195,23 @@ def sendEmail():
                         if os.path.isfile(filepath[f_index]):
                             filename = os.path.basename(filepath[f_index])
                             message = contentBoundary + '\r\n' + 'Content-Type: ' + attachmentType[f_index] + '\r\n'
-                            clientSocket.send(message.encode())
+                            clientSocket.sendall(message.encode())
                             msgfilename = "Content-Disposition: attachment; filename=" + filename + ";" \
                                           + "filename*=utf-8''" \
                                           + filename + "\r\n"
-                            clientSocket.send(msgfilename.encode())
-                            clientSocket.send(CTE.encode())
-                            clientSocket.send("\r\n".encode())
+                            clientSocket.sendall(msgfilename.encode())
+                            clientSocket.sendall(CTE.encode())
+                            clientSocket.sendall("\r\n".encode())
                             fb = open(filepath[f_index], 'rb')
                             while True:
                                 filedata = fb.read(1024)
                                 if not filedata:
                                     break
-                                clientSocket.send(base64.b64encode(filedata))
+                                clientSocket.sendall(base64.b64encode(filedata))
                             # 重新设置文件读取指针到开头
                             fb.seek(0, 0)
                             fb.close()
-                            clientSocket.send("\r\n".encode())
+                            clientSocket.sendall("\r\n".encode())
 
                 message = contentBoundary + "--" + '\r\n'
                 clientSocket.sendall(message.encode())
