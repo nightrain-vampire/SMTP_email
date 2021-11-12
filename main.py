@@ -7,6 +7,7 @@ from socket import *
 from email.base64mime import body_encode
 import os
 import base64
+import ssl
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
@@ -112,6 +113,16 @@ def sendEmail():
             if '220' != recv[:3]:
                 flag = False
                 print('220 reply not received from server.')
+
+            # 加密
+            SllCommand = "STARTTLS\r\n"
+            clientSocket.send(SllCommand.encode())
+            recv0 = clientSocket.recv(1024).decode()
+            print(recv0)
+            if '220' != recv[:3]:
+                flag = False
+                print('220 reply not received from server.')
+            clientSocket = ssl.wrap_socket(clientSocket)
 
             # 发送HELO命令并且打印服务端回复
             # 开始与服务器的交互，服务器将返回状态码250，说明请求动作正确完成
